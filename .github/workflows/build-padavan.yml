@@ -1,5 +1,4 @@
-#修改TNAME: K2P 中的K2P为你需要编译的型号，注意名称要与configs/templates/目录下的名字相同
-name: Build Padavan
+name: MI-NANO
 
 on: 
   release:
@@ -13,6 +12,8 @@ on:
 #    - cron: 0 8 * * 5
   watch:
     types: [started]
+ # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
 jobs:
   build:
@@ -34,11 +35,7 @@ jobs:
       env:
         KERNEL: 3.4
       run: |
-        if [ $KERNEL = "4.4" ] ; then
-        git clone --depth=1 https://github.com/MeIsReallyBa/padavan-4.4.git /opt/rt-n56u
-        else
-        git clone --depth=1 https://github.com/chongshengB/rt-n56u.git /opt/rt-n56u
-        fi
+        git clone --depth=1 https://github.com/yeqingyeqing/rt-n56u.git /opt/rt-n56u
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
         mkdir -p /opt/images/
